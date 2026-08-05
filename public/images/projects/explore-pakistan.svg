@@ -1,22 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#059669"/>
-      <stop offset="50%" style="stop-color:#0EA5E9"/>
-      <stop offset="100%" style="stop-color:#6366F1"/>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EAF3F6"/>
+      <stop offset="100%" stop-color="#FFF7EA"/>
     </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
+    <linearGradient id="mountain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D5E3EA"/>
+      <stop offset="100%" stop-color="#89A8BA"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7FD0D7"/>
+      <stop offset="100%" stop-color="#315D6A"/>
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="400" cy="400" r="372"/>
+    </clipPath>
   </defs>
-  <rect width="800" height="450" fill="url(#g)"/>
-  <rect width="800" height="450" fill="url(#grid)"/>
-  <circle cx="700" cy="80" r="120" fill="rgba(255,255,255,0.08)"/>
-  <circle cx="100" cy="380" r="90" fill="rgba(0,0,0,0.15)"/>
-  <g transform="translate(370, 130)">
-    <path d="M30 10c-12 0-22 10-22 22 0 16 22 40 22 40s22-24 22-40c0-12-10-22-22-22z" fill="none" stroke="white" stroke-width="3"/>
-    <circle cx="30" cy="32" r="8" fill="white"/>
+
+  <rect width="800" height="800" fill="#F6F7F9"/>
+  <circle cx="400" cy="400" r="372" fill="url(#sky)" stroke="rgba(0,0,0,0.10)" stroke-width="2"/>
+
+  <g clip-path="url(#circleClip)">
+    <path d="M0 360C120 318 188 240 280 238C359 240 404 284 473 286C552 288 614 240 800 210V800H0Z" fill="#A6C7D8" opacity="0.55"/>
+    <path d="M0 406C130 348 189 274 283 272C358 274 406 312 476 314C558 316 625 272 800 240V800H0Z" fill="#8CB4C6" opacity="0.45"/>
+
+    <path d="M86 472L210 330L305 448L389 292L492 422L602 300L714 456V800H86Z" fill="#2F6E7A"/>
+    <path d="M137 441L210 352L271 439L305 389L347 438L389 338L445 430L492 361L546 423L602 345L668 450L714 400V800H137Z" fill="#214A50"/>
+
+    <path d="M187 366L210 330L232 365L210 356Z" fill="#FFFFFF" opacity="0.92"/>
+    <path d="M286 397L305 368L325 397L305 389Z" fill="#FFFFFF" opacity="0.9"/>
+    <path d="M415 336L445 292L470 338L445 328Z" fill="#FFFFFF" opacity="0.88"/>
+    <path d="M525 349L546 320L566 350L546 343Z" fill="#FFFFFF" opacity="0.9"/>
+    <path d="M631 377L668 322L700 382L668 367Z" fill="#FFFFFF" opacity="0.84"/>
+
+    <path d="M330 520C347 461 373 415 404 390C444 417 471 468 479 538C486 600 475 662 450 714H318C300 651 299 591 330 520Z" fill="url(#water)"/>
+    <path d="M336 530C357 486 381 451 404 433C430 453 450 487 463 536C474 582 475 633 464 682H337C325 634 322 581 336 530Z" fill="#2B5560" opacity="0.55"/>
+    <path d="M332 498C359 487 384 481 407 480C430 482 455 489 481 502" fill="none" stroke="#D6FFFF" stroke-width="5" opacity="0.8"/>
+    <path d="M328 554C360 541 387 537 407 538C432 540 458 548 485 562" fill="none" stroke="#D6FFFF" stroke-width="4" opacity="0.65"/>
+    <path d="M330 612C360 600 389 596 409 598C433 600 457 608 485 622" fill="none" stroke="#D6FFFF" stroke-width="4" opacity="0.55"/>
+
+    <path d="M146 566L190 507H239L287 566V620H146Z" fill="#7A5538"/>
+    <path d="M134 510L214 453L295 510H134Z" fill="#4C3421"/>
+    <path d="M150 517L214 474L279 517H150Z" fill="#8A6B4C"/>
+    <rect x="175" y="566" width="78" height="54" fill="#CDB38F" opacity="0.85"/>
+    <rect x="202" y="503" width="24" height="116" fill="#6A472A"/>
+
+    <path d="M500 606c44-34 92-47 146-40 18 2 34 8 48 18 16 12 24 29 26 49 5 50-28 95-91 134-64 40-120 49-179 27 13-29 42-61 87-96 34-27 52-47 54-59-1-12-10-22-28-33-9-6-18-8-27-8-11 0-20 2-26 8z" fill="#1F5E3D" opacity="0.96"/>
+    <path d="M561 632c37-4 66 2 88 18" fill="none" stroke="#E8F5E9" stroke-width="8" stroke-linecap="round"/>
+    <path d="M520 663c42-16 78-20 111-14" fill="none" stroke="#E8F5E9" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="628" cy="604" r="28" fill="#F1F7E8"/>
+    <circle cx="628" cy="604" r="16" fill="#1F5E3D"/>
   </g>
-  <text x="400" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="32" font-weight="700" fill="white">Explore Pakistan Tours</text>
-  <text x="400" y="320" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="rgba(255,255,255,0.85)">Travel Web App</text>
+
+  <text x="400" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="60" font-weight="800" fill="#1F4D3A">EXPLORE</text>
+  <text x="400" y="246" text-anchor="middle" font-family="system-ui,sans-serif" font-size="56" font-weight="800" fill="#1F4D3A">PAKISTAN</text>
+  <text x="400" y="322" text-anchor="middle" font-family="system-ui,sans-serif" font-size="54" font-weight="800" fill="#1F4D3A">TOURS</text>
 </svg>

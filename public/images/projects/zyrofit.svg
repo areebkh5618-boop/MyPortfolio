@@ -1,20 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3B82F6"/>
-      <stop offset="100%" style="stop-color:#06B6D4"/>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#18202F"/>
+      <stop offset="100%" stop-color="#05070B"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#8FA3BC"/>
+      <stop offset="100%" stop-color="#D7E4F2"/>
     </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67C8FF"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
   </defs>
-  <rect width="800" height="450" fill="url(#g)"/>
-  <rect width="800" height="450" fill="url(#grid)"/>
-  <circle cx="700" cy="80" r="120" fill="rgba(255,255,255,0.08)"/>
-  <circle cx="100" cy="380" r="90" fill="rgba(0,0,0,0.15)"/>
-  <g transform="translate(376, 140) scale(2)">
-    <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="white" stroke-width="2"/><circle cx="9" cy="20" r="1.5" fill="white"/><circle cx="18" cy="20" r="1.5" fill="white"/><path d="M6 6L5 3H2" stroke="white" stroke-width="2" fill="none"/>
+
+  <rect width="800" height="800" fill="#F4F4F4"/>
+  <circle cx="400" cy="400" r="372" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="372" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  <circle cx="400" cy="170" r="54" fill="rgba(255,255,255,0.05)"/>
+
+  <g opacity="0.5" fill="none" stroke="#9BB4D0" stroke-width="2">
+    <path d="M222 230l22-18h26"/>
+    <path d="M560 236l22-18h26"/>
+    <path d="M214 558h52l26 18"/>
+    <path d="M548 550h56l18-16"/>
   </g>
-  <text x="400" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="36" font-weight="700" fill="white">ZyroFit</text>
-  <text x="400" y="320" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="rgba(255,255,255,0.85)">Ecommerce Platform</text>
+
+  <g>
+    <path d="M283 463C283 346 340 262 400 262s117 84 117 201c0 71-19 129-54 168H337c-35-39-54-97-54-168Z" fill="#0B111B" stroke="rgba(255,255,255,0.07)"/>
+    <path d="M400 258l54 108H346z" fill="#101826" opacity="0.55"/>
+    <path d="M281 474c1-100 49-184 119-184 71 0 118 84 119 184 0 59-17 106-39 144H321c-23-38-40-85-40-144Z" fill="none" stroke="url(#blue)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M333 481c0-19 6-35 17-46 13-12 30-18 50-18 21 0 37 6 49 18 11 11 17 27 17 46 0 17-6 31-18 42-12 12-28 18-48 18-20 0-36-6-49-18-12-11-18-25-18-42Z" fill="#1A2740"/>
+    <path d="M324 500c0-21 7-39 21-53 15-15 35-22 61-22 26 0 46 7 61 22 14 14 21 32 21 53 0 20-7 37-22 51-15 13-35 20-60 20s-45-7-60-20c-15-14-22-31-22-51Z" fill="url(#blue)" opacity="0.95"/>
+    <path d="M353 500h94" stroke="#1C2C48" stroke-width="22" stroke-linecap="round"/>
+    <path d="M400 453v94" stroke="#1C2C48" stroke-width="22" stroke-linecap="round"/>
+    <path d="M352 452l96 96" stroke="#1C2C48" stroke-width="14" stroke-linecap="round" opacity="0.65"/>
+    <path d="M448 452l-96 96" stroke="#1C2C48" stroke-width="14" stroke-linecap="round" opacity="0.65"/>
+    <path d="M287 284c24 22 39 50 42 83" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M513 284c-24 22-39 50-42 83" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(150 500)">
+    <rect x="0" y="0" width="120" height="140" rx="18" fill="#0D1117" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="18" y="18" width="84" height="14" rx="7" fill="#6EE7F9" opacity="0.8"/>
+    <rect x="18" y="44" width="70" height="10" rx="5" fill="rgba(255,255,255,0.18)"/>
+    <rect x="18" y="64" width="92" height="10" rx="5" fill="rgba(255,255,255,0.14)"/>
+    <rect x="18" y="84" width="58" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+    <rect x="18" y="104" width="80" height="10" rx="5" fill="rgba(255,255,255,0.10)"/>
+  </g>
+
+  <g transform="translate(530 500)">
+    <rect x="0" y="0" width="120" height="140" rx="18" fill="#0D1117" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="18" y="18" width="84" height="14" rx="7" fill="#A78BFA" opacity="0.8"/>
+    <rect x="18" y="44" width="76" height="10" rx="5" fill="rgba(255,255,255,0.18)"/>
+    <rect x="18" y="64" width="90" height="10" rx="5" fill="rgba(255,255,255,0.14)"/>
+    <rect x="18" y="84" width="62" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+    <rect x="18" y="104" width="80" height="10" rx="5" fill="rgba(255,255,255,0.10)"/>
+  </g>
+
+  <g transform="translate(285 615)">
+    <text x="115" y="0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="84" font-weight="900" fill="url(#metal)">ZYRO</text>
+    <text x="262" y="0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="84" font-weight="900" fill="url(#blue)">FIT</text>
+  </g>
 </svg>

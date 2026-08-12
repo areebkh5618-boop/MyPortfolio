@@ -99,4 +99,16 @@ export const projects: Project[] = [
     live: null,
     image: "/images/projects/malware-detector.svg",
   },
+  {
++    id: 8,
++    title: "MyFlix",
++    description:
++      "Netflix-style streaming app with user/admin roles, secure authentication, and a custom video player.",
++    longDescription:
++      "MyFlix is a full-stack streaming platform implementing role-based USER / ADMIN separation, secure authentication (bcrypt, JWT / NextAuth), Prisma-backed data models, and a custom video player with resume/save progress, watchlists, and admin analytics. Seeded demo content and an admin dashboard are included.",
++    tech: ["Next.js", "React", "TypeScript", "Prisma", "Tailwind CSS", "Node.js"],
++    github: "https://github.com/areebkh5618-boop/myflix",
++    live: "https://myflix-hazel.vercel.app",
++    image: "https://www.linkedin.com/company/myflixnet",
++  },
 ];

@@ -56,6 +56,23 @@ public/
 - Contact form
 - Fully responsive
 - SEO metadata, Open Graph, robots, sitemap
+- **Hidden Admin Panel** — manage projects & skills without public login/signup
+
+## Admin Panel
+
+Public site has **no** login or signup. Only you access admin:
+
+1. Copy `.env.example` → `.env.local` and set `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `ADMIN_SECRET`
+2. `npm run dev`
+3. Open **http://localhost:3000/admin/login** (not linked in navbar)
+
+From the dashboard you can:
+- Add / edit / delete **projects**
+- Upload project **poster images**
+- Add / edit / delete **skills**
+- Toggle **featured** projects
+
+See `ADMIN.md` for full details and production notes (Vercel vs VPS).
 
 ## Customization
 

@@ -22,7 +22,8 @@ import {
   Coffee,
   Binary,
 } from "lucide-react";
-import { skills } from "@/data/skills";
+import { useEffect, useState } from "react";
+import { skills as fallbackSkills, type Skill } from "@/data/skills";
 
 const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Container,
@@ -62,7 +63,17 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function Skills() {
+  const [skills, setSkills] = useState<Skill[]>(fallbackSkills);
   const categories = ["devops", "frontend", "backend", "languages", "database"];
+
+  useEffect(() => {
+    fetch("/api/skills")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setSkills(data);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section id="skills" className="py-20 md:py-28 relative">

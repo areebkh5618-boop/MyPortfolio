@@ -4,10 +4,20 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, X } from "lucide-react";
 import Image from "next/image";
-import { projects, type Project } from "@/data/projects";
+import { projects as fallbackProjects, type Project } from "@/data/projects";
 
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
+
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setProjects(data);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (selected) {

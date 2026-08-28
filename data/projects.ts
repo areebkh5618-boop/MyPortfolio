@@ -21,7 +21,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "Tailwind CSS", "Vercel"],
     github: "https://github.com/areebkh5618-boop",
     live: "https://explorespakistan.vercel.app/",
-    image: "/images/projects/explore-pakistan.svg",
+    image: "/images/projects/explore-pakistan.png",
     featured: true,
   },
   {
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "MongoDB", "Docker", "GitHub Actions", "Nginx"],
     github: "https://github.com/areebkh5618-boop",
     live: "https://zyrofits.vercel.app/",
-    image: "/images/projects/zyrofit.svg",
+    image: "/images/projects/zyrofit.png",
     featured: true,
   },
   {

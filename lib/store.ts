@@ -99,7 +99,7 @@ export async function getProjects(): Promise<Project[]> {
   if (isMongoConfigured()) {
     await seedMongoIfEmpty();
     const docs = await ProjectModel.find().sort({ id: -1 }).lean();
-    return docs.map((d) => toProject(d as IProject));
+    return docs.map((d) => toProject(d as unknown as IProject));
   }
   const data = await ensureFileStore();
   return data.projects;
@@ -109,7 +109,7 @@ export async function getSkills(): Promise<Skill[]> {
   if (isMongoConfigured()) {
     await seedMongoIfEmpty();
     const docs = await SkillModel.find().sort({ name: 1 }).lean();
-    return docs.map((d) => toSkill(d as ISkill));
+    return docs.map((d) => toSkill(d as unknown as ISkill));
   }
   const data = await ensureFileStore();
   return data.skills;
@@ -143,7 +143,7 @@ export async function updateProject(
       { $set: input },
       { new: true }
     ).lean();
-    return doc ? toProject(doc as IProject) : null;
+    return doc ? toProject(doc as unknown as IProject) : null;
   }
   const data = await ensureFileStore();
   const idx = data.projects.findIndex((p) => p.id === id);
@@ -197,7 +197,7 @@ export async function updateSkill(
       { $set: input },
       { new: true }
     ).lean();
-    return doc ? toSkill(doc as ISkill) : null;
+    return doc ? toSkill(doc as unknown as ISkill) : null;
   }
   const data = await ensureFileStore();
   const idx = data.skills.findIndex(

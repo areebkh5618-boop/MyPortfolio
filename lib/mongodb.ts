@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
+let mongoDisabled = false;
 
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -20,7 +21,9 @@ const cached: MongooseCache = global.mongooseCache ?? {
 global.mongooseCache = cached;
 
 export function isMongoConfigured(): boolean {
-  return Boolean(MONGODB_URI && MONGODB_URI.startsWith("mongodb"));
+  return Boolean(
+    !mongoDisabled && MONGODB_URI && MONGODB_URI.startsWith("mongodb")
+  );
 }
 
 export async function connectDB(): Promise<typeof mongoose> {
@@ -36,6 +39,12 @@ export async function connectDB(): Promise<typeof mongoose> {
     });
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  try {
+    cached.conn = await cached.promise;
+    return cached.conn;
+  } catch (error) {
+    mongoDisabled = true;
+    cached.promise = null;
+    throw error;
+  }
 }

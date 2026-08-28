@@ -97,9 +97,13 @@ function toSkill(doc: ISkill): Skill {
 
 export async function getProjects(): Promise<Project[]> {
   if (isMongoConfigured()) {
-    await seedMongoIfEmpty();
-    const docs = await ProjectModel.find().sort({ id: -1 }).lean();
-    return docs.map((d) => toProject(d as unknown as IProject));
+    try {
+      await seedMongoIfEmpty();
+      const docs = await ProjectModel.find().sort({ id: -1 }).lean();
+      return docs.map((d) => toProject(d as unknown as IProject));
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   return data.projects;
@@ -107,9 +111,13 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getSkills(): Promise<Skill[]> {
   if (isMongoConfigured()) {
-    await seedMongoIfEmpty();
-    const docs = await SkillModel.find().sort({ name: 1 }).lean();
-    return docs.map((d) => toSkill(d as unknown as ISkill));
+    try {
+      await seedMongoIfEmpty();
+      const docs = await SkillModel.find().sort({ name: 1 }).lean();
+      return docs.map((d) => toSkill(d as unknown as ISkill));
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   return data.skills;
@@ -119,10 +127,14 @@ export async function addProject(
   input: Omit<Project, "id">
 ): Promise<Project> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const id = await getNextProjectId();
-    const doc = await ProjectModel.create({ ...input, id });
-    return toProject(doc.toObject());
+    try {
+      await connectDB();
+      const id = await getNextProjectId();
+      const doc = await ProjectModel.create({ ...input, id });
+      return toProject(doc.toObject());
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   const project: Project = { ...input, id: data.nextProjectId };
@@ -137,13 +149,17 @@ export async function updateProject(
   input: Partial<Omit<Project, "id">>
 ): Promise<Project | null> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const doc = await ProjectModel.findOneAndUpdate(
-      { id },
-      { $set: input },
-      { new: true }
-    ).lean();
-    return doc ? toProject(doc as unknown as IProject) : null;
+    try {
+      await connectDB();
+      const doc = await ProjectModel.findOneAndUpdate(
+        { id },
+        { $set: input },
+        { new: true }
+      ).lean();
+      return doc ? toProject(doc as unknown as IProject) : null;
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   const idx = data.projects.findIndex((p) => p.id === id);
@@ -155,9 +171,13 @@ export async function updateProject(
 
 export async function deleteProject(id: number): Promise<boolean> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const res = await ProjectModel.deleteOne({ id });
-    return res.deletedCount > 0;
+    try {
+      await connectDB();
+      const res = await ProjectModel.deleteOne({ id });
+      return res.deletedCount > 0;
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   const before = data.projects.length;
@@ -169,13 +189,20 @@ export async function deleteProject(id: number): Promise<boolean> {
 
 export async function addSkill(input: Skill): Promise<Skill> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const exists = await SkillModel.findOne({
-      name: { $regex: new RegExp(`^${input.name}$`, "i") },
-    });
-    if (exists) throw new Error("Skill already exists");
-    const doc = await SkillModel.create(input);
-    return toSkill(doc.toObject());
+    try {
+      await connectDB();
+      const exists = await SkillModel.findOne({
+        name: { $regex: new RegExp(`^${input.name}$`, "i") },
+      });
+      if (exists) throw new Error("Skill already exists");
+      const doc = await SkillModel.create(input);
+      return toSkill(doc.toObject());
+    } catch (error) {
+      if (error instanceof Error && error.message === "Skill already exists") {
+        throw error;
+      }
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   if (data.skills.some((s) => s.name.toLowerCase() === input.name.toLowerCase())) {
@@ -191,13 +218,17 @@ export async function updateSkill(
   input: Partial<Skill>
 ): Promise<Skill | null> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const doc = await SkillModel.findOneAndUpdate(
-      { name: { $regex: new RegExp(`^${name}$`, "i") } },
-      { $set: input },
-      { new: true }
-    ).lean();
-    return doc ? toSkill(doc as unknown as ISkill) : null;
+    try {
+      await connectDB();
+      const doc = await SkillModel.findOneAndUpdate(
+        { name: { $regex: new RegExp(`^${name}$`, "i") } },
+        { $set: input },
+        { new: true }
+      ).lean();
+      return doc ? toSkill(doc as unknown as ISkill) : null;
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   const idx = data.skills.findIndex(
@@ -211,11 +242,15 @@ export async function updateSkill(
 
 export async function deleteSkill(name: string): Promise<boolean> {
   if (isMongoConfigured()) {
-    await connectDB();
-    const res = await SkillModel.deleteOne({
-      name: { $regex: new RegExp(`^${name}$`, "i") },
-    });
-    return res.deletedCount > 0;
+    try {
+      await connectDB();
+      const res = await SkillModel.deleteOne({
+        name: { $regex: new RegExp(`^${name}$`, "i") },
+      });
+      return res.deletedCount > 0;
+    } catch {
+      // Fall through to the file store when MongoDB is unavailable.
+    }
   }
   const data = await ensureFileStore();
   const before = data.skills.length;

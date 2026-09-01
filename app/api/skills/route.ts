@@ -19,7 +19,13 @@ const VALID_CATEGORIES = [
 export async function GET() {
   try {
     const skills = await getSkills();
-    return NextResponse.json(skills);
+    return NextResponse.json(skills, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: "Failed to load skills" }, { status: 500 });

@@ -67,7 +67,10 @@ export default function Skills() {
   const categories = ["devops", "frontend", "backend", "languages", "database"];
 
   useEffect(() => {
-    fetch("/api/skills")
+    fetch("/api/skills", {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) setSkills(data);

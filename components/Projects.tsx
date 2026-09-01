@@ -11,7 +11,10 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>(fallbackProjects);
 
   useEffect(() => {
-    fetch("/api/projects")
+    fetch("/api/projects", {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) setProjects(data);

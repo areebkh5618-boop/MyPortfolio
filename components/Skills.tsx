@@ -69,7 +69,8 @@ export default function Skills() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/skills", {
+    const bust = `?_t=${Date.now()}`;
+    fetch(`/api/skills${bust}`, {
       cache: "no-store",
       headers: { "Cache-Control": "no-cache" },
     })

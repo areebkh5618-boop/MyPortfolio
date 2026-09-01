@@ -11,7 +11,8 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>(fallbackProjects);
 
   useEffect(() => {
-    fetch("/api/projects", {
+    const bust = `?_t=${Date.now()}`;
+    fetch(`/api/projects${bust}`, {
       cache: "no-store",
       headers: { "Cache-Control": "no-cache" },
     })

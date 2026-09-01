@@ -84,8 +84,14 @@ export default function AdminDashboard() {
     setLoading(true);
     try {
       const [pRes, sRes] = await Promise.all([
-        fetch("/api/projects"),
-        fetch("/api/skills"),
+        fetch("/api/projects", {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        }),
+        fetch("/api/skills", {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        }),
       ]);
       if (pRes.ok) setProjects(await pRes.json());
       if (sRes.ok) setSkills(await sRes.json());
@@ -145,7 +151,11 @@ export default function AdminDashboard() {
     try {
       const fd = new FormData();
       fd.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: fd,
+        cache: "no-store",
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
       setProjectForm((f) => ({ ...f, image: data.url }));
@@ -170,9 +180,10 @@ export default function AdminDashboard() {
       live: projectForm.live || null,
     };
     try {
-      const res = await fetch("/api/projects", {
+      const res = await fetch(`/api/projects?_t=${Date.now()}`, {
         method: editingProject ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
+        cache: "no-store",
         body: JSON.stringify(
           editingProject ? { id: editingProject.id, ...payload } : payload
         ),
@@ -190,7 +201,10 @@ export default function AdminDashboard() {
 
   async function removeProject(id: number) {
     if (!confirm("Delete this project?")) return;
-    const res = await fetch(`/api/projects?id=${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/projects?id=${id}&_t=${Date.now()}`, {
+      method: "DELETE",
+      cache: "no-store",
+    });
     if (res.ok) await loadData();
     else {
       const data = await res.json();
@@ -215,9 +229,10 @@ export default function AdminDashboard() {
     setSaving(true);
     setError("");
     try {
-      const res = await fetch("/api/skills", {
+      const res = await fetch(`/api/skills?_t=${Date.now()}`, {
         method: editingSkill ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
+        cache: "no-store",
         body: JSON.stringify(
           editingSkill
             ? { originalName: editingSkill.name, ...skillForm }
@@ -237,9 +252,13 @@ export default function AdminDashboard() {
 
   async function removeSkill(name: string) {
     if (!confirm(`Delete skill "${name}"?`)) return;
-    const res = await fetch(`/api/skills?name=${encodeURIComponent(name)}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `/api/skills?name=${encodeURIComponent(name)}&_t=${Date.now()}`,
+      {
+        method: "DELETE",
+        cache: "no-store",
+      }
+    );
     if (res.ok) await loadData();
     else {
       const data = await res.json();

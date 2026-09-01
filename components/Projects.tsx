@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, X } from "lucide-react";
 import Image from "next/image";
-import { projects as fallbackProjects, type Project } from "@/data/projects";
+import type { Project } from "@/data/projects";
 
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
-  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/projects", {
       cache: "no-store",
       headers: { "Cache-Control": "no-cache" },
@@ -18,8 +20,10 @@ export default function Projects() {
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) setProjects(data);
+        else setProjects([]);
       })
-      .catch(() => {});
+      .catch(() => setProjects([]))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -66,7 +70,24 @@ export default function Projects() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {projects.map((project, index) => (
+          {loading && (
+            <>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-80 rounded-2xl border border-white/5 bg-white/5 animate-pulse"
+                />
+              ))}
+            </>
+          )}
+
+          {!loading && projects.length === 0 && (
+            <div className="col-span-full text-center text-slate-400 py-8">
+              No projects available yet.
+            </div>
+          )}
+
+          {!loading && projects.map((project, index) => (
             <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 40 }}

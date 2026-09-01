@@ -104,18 +104,7 @@ export default function Skills() {
         </motion.div>
 
         <div className="space-y-10">
-          {loading && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-              {Array.from({ length: 10 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-24 rounded-2xl border border-white/5 bg-white/5 animate-pulse"
-                />
-              ))}
-            </div>
-          )}
-
-          {!loading && categories.map((cat, catIndex) => {
+          {categories.map((cat, catIndex) => {
             const catSkills = skills.filter((s) => s.category === cat);
             return (
               <motion.div
@@ -129,31 +118,29 @@ export default function Skills() {
                   <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-secondary" />
                   {categoryLabels[cat]}
                 </h3>
-                {catSkills.length === 0 ? null : (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                    {catSkills.map((skill, index) => {
-                      const Icon = iconMap[skill.icon] || Code2;
-                      return (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.05 }}
-                          whileHover={{ scale: 1.05, y: -4 }}
-                          className={`glass rounded-2xl p-4 flex flex-col items-center gap-3 bg-gradient-to-br ${categoryColors[cat]} border hover:shadow-lg hover:shadow-primary/10 transition-all cursor-default`}
-                        >
-                          <div className="p-2.5 rounded-xl bg-white/5">
-                            <Icon className="w-6 h-6 text-slate-200" />
-                          </div>
-                          <span className="text-sm font-medium text-slate-200 text-center">
-                            {skill.name}
-                          </span>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+                  {catSkills.map((skill, index) => {
+                    const Icon = iconMap[skill.icon] || Code2;
+                    return (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.05 }}
+                        whileHover={{ scale: 1.05, y: -4 }}
+                        className={`glass rounded-2xl p-4 flex flex-col items-center gap-3 bg-gradient-to-br ${categoryColors[cat]} border hover:shadow-lg hover:shadow-primary/10 transition-all cursor-default`}
+                      >
+                        <div className="p-2.5 rounded-xl bg-white/5">
+                          <Icon className="w-6 h-6 text-slate-200" />
+                        </div>
+                        <span className="text-sm font-medium text-slate-200 text-center">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </motion.div>
             );
           })}

@@ -104,13 +104,14 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
 
     // Mode: database | cloudinary | local
-    // Default = database (base64 in MongoDB) — no Cloudinary needed
-    const mode = (process.env.IMAGE_STORAGE || "database").toLowerCase();
-
+    // Default = local disk for speed; Cloudinary is preferred when configured.
     const hasCloudinary =
       process.env.CLOUDINARY_CLOUD_NAME &&
       process.env.CLOUDINARY_API_KEY &&
       process.env.CLOUDINARY_API_SECRET;
+    const mode = (
+      process.env.IMAGE_STORAGE || (hasCloudinary ? "cloudinary" : "local")
+    ).toLowerCase();
 
     if (mode === "cloudinary" || (mode === "auto" && hasCloudinary)) {
       if (!hasCloudinary) {

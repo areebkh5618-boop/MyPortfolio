@@ -23,7 +23,7 @@ import {
   Binary,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { skills as fallbackSkills, type Skill } from "@/data/skills";
+import type { Skill } from "@/data/skills";
 
 const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Container,
@@ -63,10 +63,12 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function Skills() {
-  const [skills, setSkills] = useState<Skill[]>(fallbackSkills);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [loading, setLoading] = useState(true);
   const categories = ["devops", "frontend", "backend", "languages", "database"];
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/skills", {
       cache: "no-store",
       headers: { "Cache-Control": "no-cache" },
@@ -74,8 +76,10 @@ export default function Skills() {
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) setSkills(data);
+        else setSkills([]);
       })
-      .catch(() => {});
+      .catch(() => setSkills([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -139,9 +143,9 @@ export default function Skills() {
                           whileHover={{ scale: 1.05, y: -4 }}
                           className={`glass rounded-2xl p-4 flex flex-col items-center gap-3 bg-gradient-to-br ${categoryColors[cat]} border hover:shadow-lg hover:shadow-primary/10 transition-all cursor-default`}
                         >
-                        <div className="p-2.5 rounded-xl bg-white/5">
-                          <Icon className="w-6 h-6 text-slate-200" />
-                        </div>
+                          <div className="p-2.5 rounded-xl bg-white/5">
+                            <Icon className="w-6 h-6 text-slate-200" />
+                          </div>
                           <span className="text-sm font-medium text-slate-200 text-center">
                             {skill.name}
                           </span>

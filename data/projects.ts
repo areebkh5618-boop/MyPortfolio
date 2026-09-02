@@ -60,7 +60,7 @@ export const projects: Project[] = [
     tech: ["Python", "Docker", "Kubernetes", "Gemini AI"],
     github: "https://github.com/areebkh5618-boop",
     live: null,
-    image: "/images/projects/devops os.png",
+    image: "/images/projects/devops agent.webp",
     featured: true,
   },
   {

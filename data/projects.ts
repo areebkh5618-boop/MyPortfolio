@@ -21,7 +21,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "Tailwind CSS", "Vercel"],
     github: "https://github.com/areebkh5618-boop",
     live: "https://explorespakistan.vercel.app/",
-    image: "/images/projects/explore-pakistan.png",
+    image: "/images/projects/explore pak.png",
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "DevOps", "CI/CD", "Vercel"],
     github: "https://github.com/areebkh5618-boop",
     live: "https://areebkhan.dev/",
-    image: "/images/projects/devops-os.svg",
+    image: "/images/projects/devops os.png",
     featured: true,
   },
   {
@@ -60,7 +60,7 @@ export const projects: Project[] = [
     tech: ["Python", "Docker", "Kubernetes", "Gemini AI"],
     github: "https://github.com/areebkh5618-boop",
     live: null,
-    image: "/images/projects/ai-devops.svg",
+    image: "/images/projects/devops os.png",
     featured: true,
   },
   {
@@ -73,7 +73,7 @@ export const projects: Project[] = [
     tech: ["C++", "Data Structures", "Algorithms"],
     github: "https://github.com/areebkh5618-boop",
     live: null,
-    image: "/images/projects/ride-sharing.svg",
+    image: "/images/projects/Ride-Sharing-Services.webp",
   },
   {
     id: 6,
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     tech: ["ASP.NET", "Oracle Database", "C#"],
     github: "https://github.com/areebkh5618-boop",
     live: null,
-    image: "/images/projects/brewista.svg",
+    image: "/images/projects/brewista.webp",
   },
   {
     id: 7,
@@ -97,7 +97,7 @@ export const projects: Project[] = [
     tech: ["Python", "Machine Learning", "Scikit-learn"],
     github: "https://github.com/areebkh5618-boop",
     live: null,
-    image: "/images/projects/malware-detector.svg",
+    image: "/images/projects/detecting-malware.png",
   },
   {
     id: 8,
@@ -109,6 +109,19 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "Prisma", "Tailwind CSS", "Node.js"],
     github: "https://github.com/areebkh5618-boop/myflix",
     live: "https://myflix-hazel.vercel.app",
-    image: "/images/projects/myflix.svg",
+    image: "/images/projects/myflix.png",
+  },
+  {
+    id: 9,
+    title: "All in one Tool",
+    description:
+      "A modern full-stack video downloader app that lets users download online videos in different quality options, including HD, normal, low quality, and audio-only. It features a clean, responsive interface with fast processing, download progress tracking, and an easy-to-use experience.",
+    longDescription:
+      "### Video Downloader App\nA modern and user-friendly full-stack video downloader application designed to provide a fast and seamless way to process online video content. The application allows users to enter a video URL and select their preferred download format and quality, including high-quality video, normal quality, low quality, and audio-only downloads.\n\nThe platform is built with a clean and responsive interface that works smoothly across desktop, tablet, and mobile devices. Users can submit a video URL, retrieve available media information, select the desired quality, and monitor the download process through an intuitive interface.\n\nThe application uses a dedicated backend for handling video processing and download operations, while the frontend provides a modern user experience with clear status updates, validation, error handling, and download controls. The system is designed with a modular architecture so that additional features and supported platforms can be integrated in the future.\n\nKey features include multiple quality options, audio-only extraction, URL validation, download progress tracking, responsive UI, backend processing, error handling, and a simple one-click workflow.\n\nThis project demonstrates practical experience in full-stack development, REST API integration, asynchronous processing, backend architecture, frontend development, Docker-based deployment, and building production-style web applications.",
+    tech: ["Next.js", "React", "Node.js", "Express.js", "FFmpeg", "Docker"],
+    github: "https://github.com/areebkh5618-boop/video-downloader.git",
+    live: "https://areebfetch.areebkhan.me",
+    image: "/images/projects/video-downloader.png",
+    featured: true,
   },
 ];
